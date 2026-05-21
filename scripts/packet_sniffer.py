@@ -31,11 +31,17 @@ def get_args():
 
 
 def sniff_normal(interface):
-    scapy.sniff(iface=interface, store = False, prn=process_stored_packets)
+    try:
+        scapy.sniff(iface=interface, store = False, prn=process_stored_packets)
+    except KeyboardInterrupt:
+        print("\n[-]interrupt detected! Exiting....")
 
 
 def sniff_dns(interface):
-    scapy.sniff(iface=interface, store=False, prn=process_DNS_packets)
+    try:
+        scapy.sniff(iface=interface, store=False, prn=process_DNS_packets)
+    except KeyboardInterrupt:
+        print("\n[-]interrupt detected! Exiting....")
 
 
 def process_DNS_packets(packet):
@@ -96,11 +102,14 @@ def process_stored_packets(packet):
 options = get_args()
 
 inf = options.interface
-if options.dns:
-    print("Capturing DNS packets: \n")
-    sniff_dns(inf)
-else:
-    print("Capture mode normal: \n")
-    sniff_normal(inf)
 
+try:
+    if options.dns:
+        print("Capturing DNS packets: \n")
+        sniff_dns(inf)
+    else:
+        print("Capture mode normal: \n")
+        sniff_normal(inf)
+except KeyboardInterrupt:
+    print("\ninterrupt detected! Exiting....")
 
