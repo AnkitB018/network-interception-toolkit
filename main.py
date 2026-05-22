@@ -5,7 +5,7 @@ import subprocess
 import sys
 
 commands = {
-    "change-mac": "scripts/mac_change.py",
+    "change-mac": "scripts/mac_changer.py",
     "net-scan": "scripts/net_scanner.py",
     "arp-spoof": "scripts/arp_spoof.py",
     "dns-spoof": "scripts/dns_spoof.py",
