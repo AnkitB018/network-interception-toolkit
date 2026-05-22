@@ -91,6 +91,7 @@ Options:
 Notes:
 - Requires root privileges
 - Interface may temporarily disconnect during MAC change
+- Will only work in linux
 
 ---
 
@@ -123,6 +124,7 @@ Options:
 
 Notes:
 - Works only on local network
+- If IP range not provided, it tries to automatically find the local subnet
 - Uses ARP scanning
 - Fast and reliable for LAN discovery
 
@@ -158,17 +160,8 @@ Options:
 ```
 
 Important:
-- IP forwarding must be enabled
-- FORWARD policy may need to be ACCEPT
 - Works only on IPv4
-- IPv6 traffic is not affected by ARP spoofing
-
-Enable forwarding:
-
-```bash
-echo 1 | sudo tee /proc/sys/net/ipv4/ip_forward
-sudo iptables --policy FORWARD ACCEPT
-```
+- IPv6 traffic may not be affected by ARP spoofing
 
 Notes:
 - Automatically restores ARP tables on exit
@@ -229,7 +222,7 @@ Important:
 
 Notes:
 - Net cut mode can be used to verify MITM forwarding path
-- IPv6 traffic is not spoofed
+- IPv6 traffic may not be spoofed
 - Local test mode is useful for debugging
 
 ---
@@ -298,7 +291,6 @@ Current features:
 - ARP spoofing
 - DNS spoofing
 - Packet sniffing
-- NetfilterQueue experimentation
 
 Planned future additions:
 - HTTPS bypass experiments
