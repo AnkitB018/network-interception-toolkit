@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+import argparse
 import argparse
 import subprocess
 import sys
@@ -21,6 +23,13 @@ if len(sys.argv) >= 3 and sys.argv[2] in ["-h", "--help"]:
         sys.exit(0)
 
 parser = argparse.ArgumentParser()
+
+parser.add_argument(
+    "--version",
+    "-v",
+    action="version",
+    version="network-mitm-toolkit v1.0"
+)
 
 subparsers = parser.add_subparsers(dest="command")
 
