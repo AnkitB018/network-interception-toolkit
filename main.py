@@ -33,15 +33,19 @@ parser.add_argument(
 
 subparsers = parser.add_subparsers(dest="command")
 
-for cmd in commands:
-    subparsers.add_parser(cmd)
 
-args, remaining = parser.parse_known_args()
+try:
+    for cmd in commands:
+        subparsers.add_parser(cmd)
 
-if args.command in commands:
-    subprocess.call(
-        ["python3", commands[args.command]] + remaining
-    )
+    args, remaining = parser.parse_known_args()
 
-else:
-    parser.print_help()
+    if args.command in commands:
+        subprocess.call(
+            ["python3", commands[args.command]] + remaining
+        )
+
+    else:
+        parser.print_help()
+except KeyboardInterrupt:
+    sys.exit(1) #silent exit
